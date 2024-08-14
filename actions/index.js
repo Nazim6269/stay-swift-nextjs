@@ -4,14 +4,15 @@ import { signIn } from '@/auth';
 
 export const login = async (formData) => {
   try {
-    const res = await signIn('credentials', {
+    const signInData = {
       email: formData.get('email'),
       password: formData.get('password'),
       redirect: false,
-    });
+    };
 
+    const res = await signIn('credentials', signInData);
     return res;
   } catch (error) {
-    throw error;
+    throw new Error(error);
   }
 };

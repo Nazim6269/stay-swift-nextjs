@@ -12,6 +12,8 @@ import {
 } from './ secret';
 import mongoClientPromise from './lib/client';
 import { userModel } from './models/usersModels';
+import { passMatch } from './utils/passMatch';
+import { findUserByCredentials } from './db/queries/userQuery/query';
 
 const authOptions = {
   adapter: MongoDBAdapter(mongoClientPromise, {
@@ -41,9 +43,14 @@ const authOptions = {
         if (!credentials) return null;
 
         try {
-          const user = await userModel.findOne({ email: credentials.email });
+          const user = await findUserByCredentials({
+            email: credentials.email,
+          });
           if (user) {
-            const isMatchPass = user.password === credentials.password;
+            const isMatchPass = await passMatch(
+              credentials.password,
+              user.password,
+            );
 
             if (isMatchPass) {
               return user;

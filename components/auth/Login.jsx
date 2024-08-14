@@ -4,7 +4,7 @@ import { login } from '@/actions';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-//TODO: not redirect bookings afte login with credentials
+//TODO: error message did'nt show
 
 const Login = () => {
   const [error, setError] = useState('');
@@ -16,8 +16,8 @@ const Login = () => {
       const formData = new FormData(e.currentTarget);
       const res = await login(formData);
 
-      if (!!res.error.message) {
-        setError(res.error.message);
+      if (!!res.error) {
+        setError(res.error);
       } else {
         router.push('/bookings');
       }
