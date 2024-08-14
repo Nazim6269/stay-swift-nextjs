@@ -10,8 +10,7 @@ const LoginPage = () => {
         <h4 className="font-bold text-2xl">Login in</h4>
         <Login />
 
-        <div className="text-center text-xs text-gray-500">or Signup with</div>
-        <SocialLogins />
+        <SocialLogins mode={'login'} />
       </div>
     </section>
   );

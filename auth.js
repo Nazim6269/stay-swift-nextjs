@@ -1,26 +1,26 @@
+import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import NextAuth from 'next-auth';
-import FacebookProvider from 'next-auth/providers/facebook';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import {
-  fbId,
-  fbSecret,
+  environmentSecret,
   githubId,
   githubSecret,
   googleId,
   googleSecret,
 } from './ secret';
+import mongoClientPromise from './lib/client';
 
 const authOptions = {
+  adapter: MongoDBAdapter(mongoClientPromise, {
+    databaseName: environmentSecret,
+  }),
   providers: [
     GithubProvider({
       clientId: githubId,
       clientSecret: githubSecret,
     }),
-    FacebookProvider({
-      clientId: fbId,
-      clientSecret: fbSecret,
-    }),
+
     GoogleProvider({
       clientId: googleId,
       clientSecret: googleSecret,

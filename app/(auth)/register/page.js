@@ -9,9 +9,7 @@ const RegistrationPage = () => {
         <h4 className="font-bold text-2xl">Sign up</h4>
         <Signup />
 
-        <div className="text-center text-xs text-gray-500">or Signup with</div>
-
-        <SocialLogins />
+        <SocialLogins mode={'register'} />
       </div>
     </section>
   );
