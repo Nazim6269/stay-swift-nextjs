@@ -1,13 +1,26 @@
 import { hotelModel } from '@/models/hotelsModels';
-import { removeMongoId } from '@/utils/remove';
+import { removeMongoId, removeObjId } from '@/utils/remove';
 
 const getAllHotels = async () => {
   const hotels = await hotelModel
     .find()
-    .select(['highRate', 'lowRate', 'city', 'thumbnailUrl', 'propertyCategory'])
+    .select([
+      'highRate',
+      'name',
+      'lowRate',
+      'city',
+      'thumbNailUrl',
+      'propertyCategory',
+    ])
     .lean();
 
   return removeMongoId(hotels);
 };
 
-export { getAllHotels };
+const getSingleItemById = async (id) => {
+  const hotel = await hotelModel.findById(id).lean();
+
+  return removeObjId(hotel);
+};
+
+export { getAllHotels, getSingleItemById };

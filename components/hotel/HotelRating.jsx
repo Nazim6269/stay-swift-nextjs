@@ -3,10 +3,7 @@ import { findAvgRating, getRatingDescription } from '@/utils/rating';
 
 const HotelRating = async ({ id }) => {
   const ratings = await getRatingsHotel(id);
-  //console.log(ratings, 'hotelRating1');
-
   const avgRating = findAvgRating(ratings);
-  console.log(avgRating, 'hotelRating');
   const desc = getRatingDescription(avgRating);
 
   return (

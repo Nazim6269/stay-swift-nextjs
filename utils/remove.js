@@ -10,3 +10,9 @@ export const removeMongoId = (hotelsArray) => {
 
   return mappedArray;
 };
+
+export const removeObjId = (obj) => {
+  const { _id, ...mappedObj } = { ...obj, id: obj._id.toString() };
+
+  return mappedObj;
+};
