@@ -1,14 +1,16 @@
 import { getAllHotels } from '@/db/queries/hotelsQuery/hotelQuery';
-import Card from './Card';
+import HotelCard from './HotelCard';
 
 const List = async () => {
   const data = await getAllHotels();
-  console.log(data);
+
   return (
     <>
       <div className="col-span-9">
         <div className="space-y-4">
-          <Card />
+          {data?.map((item) => (
+            <HotelCard key={item?.id} item={item} />
+          ))}
         </div>
       </div>
     </>

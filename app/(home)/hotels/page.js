@@ -1,5 +1,5 @@
 import Search from '@/components/search/Search';
-import List from '@/components/hotel/List';
+import HotelList from '@/components/hotel/HotelList';
 import Filter from '@/components/search/Filter';
 
 const HotelListPage = () => {
@@ -13,7 +13,7 @@ const HotelListPage = () => {
       <section className="py-12">
         <div className="container grid grid-cols-12">
           <Filter />
-          <List />
+          <HotelList />
         </div>
       </section>
     </>
