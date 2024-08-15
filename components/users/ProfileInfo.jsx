@@ -10,7 +10,7 @@ const ProfileInfo = async () => {
         {/* <!-- profile info --> */}
         <div className="flex flex-col items-center py-8 text-center">
           {/* <!-- profile image --> */}
-          <div className="relative max-h-[180px] max-w-[180px] rounded-full lg:mb-8 h-[100px] w-[100px] grid place-items-center text-4xl text-white">
+          <div className="relative max-h-[180px] max-w-[180px] rounded-full lg:mb-8 h-[100px] w-[100px] grid place-items-center text-4xl bg-slate-600 text-white">
             {session?.user?.image ? (
               <Image
                 width={90}
@@ -20,9 +20,7 @@ const ProfileInfo = async () => {
                 alt={session?.user?.name}
               />
             ) : (
-              <div className="max-h-[180px] max-w-[180px] rounded-full lg:mb-8 h-[100px] w-[100px] grid place-items-center text-4xl bg-gray-700 text-white">
-                {session?.user?.name.charAt(0).toUpperCase()}
-              </div>
+              session?.user?.name.charAt(0).toUpperCase()
             )}
           </div>
           {/* <!-- name , email --> */}

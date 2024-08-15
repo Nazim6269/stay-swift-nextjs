@@ -1,7 +1,12 @@
+import { auth } from '@/auth';
 import Payment from '@/components/payment/Payment';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
-const PaymentPage = () => {
+const PaymentPage = async () => {
+  const session = await auth();
+
+  if (!session) redirect('/login');
   return (
     <section className="container">
       <div className="p-6 rounded-lg max-w-xl mx-auto my-12 mt-[100px]">
