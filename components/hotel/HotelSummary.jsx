@@ -1,7 +1,6 @@
-import React from 'react';
+import Link from 'next/link';
 import HotelRating from './HotelRating';
 import HotelReviewNumber from './HotelReviewNumber';
-import Link from 'next/link';
 
 const HotelSummary = ({ fromListPage, info }) => {
   return (
@@ -16,6 +15,11 @@ const HotelSummary = ({ fromListPage, info }) => {
         <div className="flex gap-2 items-center my-4">
           <HotelRating id={info?.id} />
           <HotelReviewNumber id={info?.id} />
+          {info?.isBooked && (
+            <span className="bg-red-500 px-2 rounded-md">
+              Sorry, already booked
+            </span>
+          )}
         </div>
         <div>
           <span className="bg-yellow-300 p-1 rounded-md">

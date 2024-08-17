@@ -1,8 +1,8 @@
 import { getAllHotels } from '@/db/queries/hotelsQuery/hotelQuery';
 import HotelCard from './HotelCard';
 
-const List = async () => {
-  const data = await getAllHotels();
+const List = async ({ destination, checkin, checkout }) => {
+  const data = await getAllHotels(destination, checkin, checkout);
 
   return (
     <>
