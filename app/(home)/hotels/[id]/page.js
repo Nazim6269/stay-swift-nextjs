@@ -3,8 +3,11 @@ import Overview from '@/components/details/Overview';
 import Summary from '@/components/details/Summary';
 import { getSingleItemById } from '@/db/queries/hotelsQuery/hotelQuery';
 
-const HotelDetailsPage = async ({ params: { id } }) => {
-  const singleHotel = await getSingleItemById(id);
+const HotelDetailsPage = async ({
+  params: { id },
+  searchParams: { checkin, checkout },
+}) => {
+  const singleHotel = await getSingleItemById(id, checkin, checkout);
 
   return (
     <>

@@ -3,7 +3,7 @@ import { hotelModel } from '@/models/hotelsModels';
 import { isDateInBetween } from '@/utils/date';
 import { removeMongoId, removeObjId } from '@/utils/remove';
 
-const getAllHotels = async (destination, checkin, checkout) => {
+const getAllHotels = async (destination, checkin, checkout, category) => {
   const regex = new RegExp(destination, 'i');
   const hotelsByDestination = await hotelModel
     .find({ city: { $regex: regex } })
@@ -18,6 +18,14 @@ const getAllHotels = async (destination, checkin, checkout) => {
     .lean();
 
   let allHotels = hotelsByDestination;
+
+  if (category) {
+    const matches = category.split('|');
+
+    allHotels = allHotels.filter((hotel) =>
+      matches.includes(hotel.propertyCategory.toString()),
+    );
+  }
 
   if (checkin && checkout) {
     allHotels = await Promise.all(
@@ -61,8 +69,16 @@ const findBooking = async (hotelId, checkin, checkout) => {
   return found;
 };
 
-const getSingleItemById = async (id) => {
+const getSingleItemById = async (id, checkin, checkout) => {
   const hotel = await hotelModel.findById(id).lean();
+
+  const found = await findBooking(id, checkin, checkout);
+
+  if (found) {
+    hotel['isBooked'] = true;
+  } else {
+    hotel['isBooked'] = false;
+  }
 
   return removeObjId(hotel);
 };
